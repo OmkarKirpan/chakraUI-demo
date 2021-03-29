@@ -31,6 +31,7 @@ export default function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError("");
     setIsLoading(true);
 
     try {
