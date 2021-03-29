@@ -1,10 +1,10 @@
 {
-  "name": "react",
+  "name": "company-details",
   "version": "1.0.0",
-  "description": "React example starter project",
+  "description": "Company Details",
   "keywords": [
-    "react",
-    "starter"
+    "company",
+    "react"
   ],
   "main": "src/index.js",
   "dependencies": {

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Box,
   Flex,
@@ -10,16 +12,43 @@ import {
   Textarea,
   Button
 } from "@chakra-ui/react";
-import { PhoneIcon } from "@chakra-ui/icons";
+import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import ErrorMessage from "./ErrorMessage";
+import userSubmit from "../utils/mockApi";
+
 export default function App() {
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [tel, setTel] = useState("");
+  const [alttel, setAlttel] = useState("");
+  const [gstNum, setGstNum] = useState("");
+  const [website, setWebsite] = useState("");
+
+  const [error, setError] = useState("");
+  const [isloading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      await userSubmit({ name, address, email, tel, alttel, gstNum, website });
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError("Something went wrong.");
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <Box textAlign="right" py={4} mr={12}>
         <ColorModeSwitcher />
       </Box>
-      <Flex width="full" align="center" justifyContent="center">
+      <Flex p={4} width="full" align="center" justifyContent="center">
         <Box
           p={8}
           width="60%"
@@ -31,21 +60,39 @@ export default function App() {
           <Box textAlign="center">
             <Heading>Company Details</Heading>
           </Box>
-          <ErrorMessage message={"Error Message"} />
-          {/* {error && <ErrorMessage message={error} />} */}
+          {/* <ErrorMessage message={"Error Message"} /> */}
+          {error && <ErrorMessage message={error} />}
           <Box my={4} textAlign="left">
-            <form>
+            <form onSubmit={handleSubmit}>
               <FormControl mt={2}>
                 <FormLabel>Name</FormLabel>
-                <Input type="name" placeholder="Company Name" />
+                <Input
+                  type="name"
+                  placeholder="Company Name"
+                  onChange={(event) => setName(event.currentTarget.value)}
+                />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Address</FormLabel>
-                <Textarea type="address" placeholder="Company Address" />
+                <Textarea
+                  type="address"
+                  placeholder="Company Address"
+                  onChange={(event) => setAddress(event.currentTarget.value)}
+                />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Email</FormLabel>
-                <Input type="email" placeholder="test@test.com" />
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<EmailIcon color="gray.300" />}
+                  />
+                  <Input
+                    type="email"
+                    placeholder="test@test.com"
+                    onChange={(event) => setEmail(event.currentTarget.value)}
+                  />
+                </InputGroup>
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Phone</FormLabel>
@@ -54,19 +101,45 @@ export default function App() {
                     pointerEvents="none"
                     children={<PhoneIcon color="gray.300" />}
                   />
-                  <Input type="tel" placeholder="Company Phone number" />
+                  <Input
+                    type="tel"
+                    placeholder="Company Phone number"
+                    onChange={(event) => setTel(event.currentTarget.value)}
+                  />
+                </InputGroup>
+              </FormControl>
+              <FormControl mt={2}>
+                <FormLabel>Alternate Phone</FormLabel>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<PhoneIcon color="gray.300" />}
+                  />
+                  <Input
+                    type="alttel"
+                    placeholder="Company Alternate Phone number"
+                    onChange={(event) => setAlttel(event.currentTarget.value)}
+                  />
                 </InputGroup>
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>GST Number</FormLabel>
-                <Input type="gstNum" placeholder="Company GST Number" />
+                <Input
+                  type="gstNum"
+                  placeholder="Company GST Number"
+                  onChange={(event) => setGstNum(event.currentTarget.value)}
+                />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Website</FormLabel>
-                <Input type="website" placeholder="Company Website" />
+                <Input
+                  type="website"
+                  placeholder="Company Website"
+                  onChange={(event) => setWebsite(event.currentTarget.value)}
+                />
               </FormControl>
               <Button
-                // isLoading
+                isLoading={isloading}
                 loadingText="Submitting"
                 variant="outline"
                 colorScheme="teal"
