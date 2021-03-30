@@ -12,6 +12,16 @@ const userSubmit = async ({
       console.log(
         `Company Details: \n name=${name}, address=${address}, email=${email}, tel=${tel}, alttel=${alttel}, gstNum=${gstNum}, website=${website}`
       );
+      //save to localstorage
+      localStorage.setItem("company", {
+        name,
+        address,
+        email,
+        tel,
+        alttel,
+        gstNum,
+        website
+      });
       if (email === "okirpan@gmail.com") {
         resolve();
       } else {
