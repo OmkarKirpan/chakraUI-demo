@@ -13,9 +13,9 @@ import {
   Button
 } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
-import { ColorModeSwitcher } from "./ColorModeSwitcher";
+
 import ErrorMessage from "./ErrorMessage";
-import userSubmit from "../utils/mockApi";
+import userSubmit from "./utils/mockApi";
 
 export default function CompanyDetails() {
   const [name, setName] = useState("");
@@ -57,9 +57,6 @@ export default function CompanyDetails() {
   };
   return (
     <>
-      <Box textAlign="right" py={4} mr={12}>
-        <ColorModeSwitcher />
-      </Box>
       <Flex p={4} width="full" align="center" justifyContent="center">
         <Box
           p={8}
