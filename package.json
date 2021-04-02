@@ -2,7 +2,10 @@
   "name": "company-details",
   "version": "1.0.0",
   "description": "Company Details",
-  "keywords": ["company", "react"],
+  "keywords": [
+    "company",
+    "react"
+  ],
   "main": "src/index.js",
   "dependencies": {
     "@chakra-ui/icons": "1.0.7",
@@ -28,5 +31,10 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

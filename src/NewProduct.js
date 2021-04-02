@@ -19,12 +19,16 @@ import userSubmit from "./utils/mockApi";
 
 export default function NewProduct() {
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [tel, setTel] = useState("");
-  const [alttel, setAlttel] = useState("");
-  const [gstNum, setGstNum] = useState("");
-  const [website, setWebsite] = useState("");
+  const [code, setCode] = useState("");
+  const [buyPrice, setBuyPrice] = useState("");
+  const [salePrice, setSalePrice] = useState("");
+  const [unit, setUnit] = useState("");
+  const [defaultQty, setDefaultQty] = useState("");
+  const [stock, setStock] = useState("");
+  const [isTaxable, setIsTaxable] = useState("");
+  const [description, setDescription] = useState("");
+  const [note, setNote] = useState("");
+
 
   const [error, setError] = useState("");
   const [isloading, setIsLoading] = useState(false);
@@ -65,74 +69,72 @@ export default function NewProduct() {
                 <FormLabel>Name</FormLabel>
                 <Input
                   type="name"
-                  placeholder="Company Name"
+                  placeholder="Product Name"
                   onChange={(event) => setName(event.currentTarget.value)}
                 />
               </FormControl>
               <FormControl mt={2}>
-                <FormLabel>Address</FormLabel>
+                <FormLabel>Code (Barcode/SKU)</FormLabel>
                 <Textarea
-                  type="address"
-                  placeholder="Company Address"
-                  onChange={(event) => setAddress(event.currentTarget.value)}
+                  type="code"
+                  placeholder="Product Code"
+                  onChange={(event) => setCode(event.currentTarget.value)}
                 />
               </FormControl>
               <FormControl mt={2}>
-                <FormLabel>Email</FormLabel>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<EmailIcon color="gray.300" />}
-                  />
-                  <Input
-                    type="email"
-                    placeholder="test@test.com"
-                    onChange={(event) => setEmail(event.currentTarget.value)}
-                  />
-                </InputGroup>
-              </FormControl>
-              <FormControl mt={2}>
-                <FormLabel>Phone</FormLabel>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<PhoneIcon color="gray.300" />}
-                  />
-                  <Input
-                    type="tel"
-                    placeholder="Company Phone number"
-                    onChange={(event) => setTel(event.currentTarget.value)}
-                  />
-                </InputGroup>
-              </FormControl>
-              <FormControl mt={2}>
-                <FormLabel>Alternate Phone</FormLabel>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<PhoneIcon color="gray.300" />}
-                  />
-                  <Input
-                    type="alttel"
-                    placeholder="Company Alternate Phone number"
-                    onChange={(event) => setAlttel(event.currentTarget.value)}
-                  />
-                </InputGroup>
-              </FormControl>
-              <FormControl mt={2}>
-                <FormLabel>GST Number</FormLabel>
-                <Input
-                  type="gstNum"
-                  placeholder="Company GST Number"
-                  onChange={(event) => setGstNum(event.currentTarget.value)}
+                <FormLabel>Buy Price</FormLabel>
+                <Textarea
+                  type="buyPrice"
+                  placeholder="Buy Price"
+                  onChange={(event) => setBuyPrice(event.currentTarget.value)}
                 />
               </FormControl>
               <FormControl mt={2}>
-                <FormLabel>Website</FormLabel>
+                <FormLabel>Sale Price</FormLabel>
+                <Textarea
+                  type="salePrice"
+                  placeholder="Sale Price"
+                  onChange={(event) => setSalePrice(event.currentTarget.value)}
+                />
+              </FormControl>
+              <FormControl mt={2}>
+                <FormLabel>Unit</FormLabel>
+                <Textarea
+                  type="unit"
+                  placeholder="Unit"
+                  onChange={(event) => setUnit(event.currentTarget.value)}
+                />
+              </FormControl>
+              <FormControl mt={2}>
+                <FormLabel>Default Quantity</FormLabel>
+                <Textarea
+                  type="defaultQty"
+                  placeholder="Default Quantity"
+                  onChange={(event) => setDefaultQty(event.currentTarget.value)}
+                />
+              </FormControl>
+              <FormControl mt={2}>
+                <FormLabel>Stock</FormLabel>
                 <Input
-                  type="website"
-                  placeholder="Company Website"
-                  onChange={(event) => setWebsite(event.currentTarget.value)}
+                  type="stock"
+                  placeholder="Stock"
+                  onChange={(event) => setStock(event.currentTarget.value)}
+                />
+              </FormControl>
+              <FormControl mt={2}>
+                <FormLabel>Description</FormLabel>
+                <Input
+                  type="description"
+                  placeholder="Description"
+                  onChange={(event) => setDescription(event.currentTarget.value)}
+                />
+              </FormControl>
+              <FormControl mt={2}>
+                <FormLabel>Note</FormLabel>
+                <Input
+                  type="note"
+                  placeholder="Note"
+                  onChange={(event) => setNote(event.currentTarget.value)}
                 />
               </FormControl>
               <Button
