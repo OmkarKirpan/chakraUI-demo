@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
+import useToggle from "./utils/hooks/useToggle";
 
 import {
   Box,
   Flex,
+  Spacer,
   Heading,
   FormControl,
   FormLabel,
   Input,
-  InputGroup,
-  InputLeftElement,
+  Switch,
+  Select,
   Textarea,
-  Button
+  Button,
 } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 
@@ -25,10 +27,9 @@ export default function NewProduct() {
   const [unit, setUnit] = useState("");
   const [defaultQty, setDefaultQty] = useState("");
   const [stock, setStock] = useState("");
-  const [isTaxable, setIsTaxable] = useState("");
+  const [isTaxable, toggleIsTaxable] = useToggle(false);
   const [description, setDescription] = useState("");
   const [note, setNote] = useState("");
-
 
   const [error, setError] = useState("");
   const [isloading, setIsLoading] = useState(false);
@@ -39,7 +40,18 @@ export default function NewProduct() {
     setIsLoading(true);
 
     try {
-      await userSubmit({ name, address, email, tel, alttel, gstNum, website });
+      await userSubmit({
+        name,
+        code,
+        buyPrice,
+        salePrice,
+        unit,
+        defaultQty,
+        stock,
+        isTaxable,
+        description,
+        note,
+      });
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -68,47 +80,53 @@ export default function NewProduct() {
               <FormControl mt={2}>
                 <FormLabel>Name</FormLabel>
                 <Input
-                  type="name"
+                  type="text"
+                  name="name"
                   placeholder="Product Name"
                   onChange={(event) => setName(event.currentTarget.value)}
                 />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Code (Barcode/SKU)</FormLabel>
-                <Textarea
-                  type="code"
+                <Input
+                  type="text"
+                  name="code"
                   placeholder="Product Code"
                   onChange={(event) => setCode(event.currentTarget.value)}
                 />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Buy Price</FormLabel>
-                <Textarea
-                  type="buyPrice"
+                <Input
+                  type="text"
+                  name="buyPrice"
                   placeholder="Buy Price"
                   onChange={(event) => setBuyPrice(event.currentTarget.value)}
                 />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Sale Price</FormLabel>
-                <Textarea
-                  type="salePrice"
+                <Input
+                  type="text"
+                  name="salePrice"
                   placeholder="Sale Price"
                   onChange={(event) => setSalePrice(event.currentTarget.value)}
                 />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Unit</FormLabel>
-                <Textarea
-                  type="unit"
+                <Input
+                  type="text"
+                  name="unit"
                   placeholder="Unit"
                   onChange={(event) => setUnit(event.currentTarget.value)}
                 />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Default Quantity</FormLabel>
-                <Textarea
-                  type="defaultQty"
+                <Input
+                  type="text"
+                  name="defaultQty"
                   placeholder="Default Quantity"
                   onChange={(event) => setDefaultQty(event.currentTarget.value)}
                 />
@@ -116,23 +134,55 @@ export default function NewProduct() {
               <FormControl mt={2}>
                 <FormLabel>Stock</FormLabel>
                 <Input
-                  type="stock"
+                  type="text"
+                  name="stock"
                   placeholder="Stock"
                   onChange={(event) => setStock(event.currentTarget.value)}
                 />
               </FormControl>
+
+              <FormControl mt={4} display="flex" alignItems="center">
+                <FormLabel htmlFor="isTaxable" mb="0">
+                  Taxable
+                </FormLabel>
+                <Switch
+                  id="isTaxable"
+                  colorScheme="teal"
+                  onChange={() => {
+                    toggleIsTaxable();
+                  }}
+                />
+                <Spacer />
+                {isTaxable && (
+                  <Select
+                    placeholder="Select Tax"
+                    size="sm"
+                    width="40%"
+                    onChange={(event) => {
+                      console.log(event.target.value);
+                    }}
+                  >
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                )}
+              </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Description</FormLabel>
-                <Input
-                  type="description"
+                <Textarea
+                  name="description"
                   placeholder="Description"
-                  onChange={(event) => setDescription(event.currentTarget.value)}
+                  onChange={(event) =>
+                    setDescription(event.currentTarget.value)
+                  }
                 />
               </FormControl>
               <FormControl mt={2}>
                 <FormLabel>Note</FormLabel>
-                <Input
-                  type="note"
+                <Textarea
+                  name="note"
                   placeholder="Note"
                   onChange={(event) => setNote(event.currentTarget.value)}
                 />
@@ -152,12 +202,15 @@ export default function NewProduct() {
           </Box>
           {JSON.stringify({
             name,
-            address,
-            email,
-            tel,
-            alttel,
-            gstNum,
-            website
+            code,
+            buyPrice,
+            salePrice,
+            unit,
+            defaultQty,
+            stock,
+            isTaxable,
+            description,
+            note,
           })}
         </Box>
       </Flex>

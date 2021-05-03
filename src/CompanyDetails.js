@@ -10,7 +10,7 @@ import {
   InputGroup,
   InputLeftElement,
   Textarea,
-  Button
+  Button,
 } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 
@@ -76,7 +76,8 @@ export default function CompanyDetails() {
               <FormControl mt={2}>
                 <FormLabel>Name</FormLabel>
                 <Input
-                  type="name"
+                  type="text"
+                  name="name"
                   placeholder="Company Name"
                   onChange={(event) => setName(event.currentTarget.value)}
                 />
@@ -84,7 +85,7 @@ export default function CompanyDetails() {
               <FormControl mt={2}>
                 <FormLabel>Address</FormLabel>
                 <Textarea
-                  type="address"
+                  name="address"
                   placeholder="Company Address"
                   onChange={(event) => setAddress(event.currentTarget.value)}
                 />
@@ -98,6 +99,7 @@ export default function CompanyDetails() {
                   />
                   <Input
                     type="email"
+                    name="email"
                     placeholder="test@test.com"
                     onChange={(event) => setEmail(event.currentTarget.value)}
                   />
@@ -112,6 +114,7 @@ export default function CompanyDetails() {
                   />
                   <Input
                     type="tel"
+                    name="tel"
                     placeholder="Company Phone number"
                     onChange={(event) => setTel(event.currentTarget.value)}
                   />
@@ -125,7 +128,8 @@ export default function CompanyDetails() {
                     children={<PhoneIcon color="gray.300" />}
                   />
                   <Input
-                    type="alttel"
+                    type="tel"
+                    name="alttel"
                     placeholder="Company Alternate Phone number"
                     onChange={(event) => setAlttel(event.currentTarget.value)}
                   />
@@ -134,7 +138,8 @@ export default function CompanyDetails() {
               <FormControl mt={2}>
                 <FormLabel>GST Number</FormLabel>
                 <Input
-                  type="gstNum"
+                  name="gstNum"
+                  type="text"
                   placeholder="Company GST Number"
                   onChange={(event) => setGstNum(event.currentTarget.value)}
                 />
@@ -142,7 +147,8 @@ export default function CompanyDetails() {
               <FormControl mt={2}>
                 <FormLabel>Website</FormLabel>
                 <Input
-                  type="website"
+                  name="website"
+                  type="text"
                   placeholder="Company Website"
                   onChange={(event) => setWebsite(event.currentTarget.value)}
                 />
@@ -167,7 +173,7 @@ export default function CompanyDetails() {
             tel,
             alttel,
             gstNum,
-            website
+            website,
           })}
         </Box>
       </Flex>
